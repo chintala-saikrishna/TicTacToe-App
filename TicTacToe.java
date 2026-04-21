@@ -1,11 +1,9 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class TicTacToe {
 
-    // Board
     static char[][] board = new char[3][3];
 
-    // Game state variables
     static boolean isHumanTurn;
     static char humanSymbol;
     static char computerSymbol;
@@ -15,59 +13,20 @@ public class TicTacToe {
         tossAndAssignSymbols();
         displayTossResult();
         printBoard();
+
+       
+        int slot = getUserSlot();
+        System.out.println("You entered: " + slot);
     }
 
-    // UC1: Initialize board
-    static void initializeBoard() {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                board[row][col] = '-';
-            }
-        }
-    }
 
-    // UC1: Print board
-    static void printBoard() {
-        System.out.println("-------------");
 
-        for (int row = 0; row < 3; row++) {
-            System.out.print("| ");
-            for (int col = 0; col < 3; col++) {
-                System.out.print(board[row][col] + " | ");
-            }
-            System.out.println();
-            System.out.println("-------------");
-        }
-    }
+    static int getUserSlot() {
+        Scanner sc = new Scanner(System.in);
 
-    // UC2: Toss logic
-    static void tossAndAssignSymbols() {
-        Random rand = new Random();
-        int toss = rand.nextInt(2);
+        System.out.print("Enter a slot number (1-9): ");
+        int slot = sc.nextInt();
 
-        if (toss == 0) {
-            isHumanTurn = true;
-            humanSymbol = 'X';
-            computerSymbol = 'O';
-        } else {
-            isHumanTurn = false;
-            humanSymbol = 'O';
-            computerSymbol = 'X';
-        }
-    }
-
-    // UC2: Display result
-    static void displayTossResult() {
-        if (isHumanTurn) {
-            System.out.println("You won the toss!");
-            System.out.println("You are: " + humanSymbol);
-            System.out.println("Computer is: " + computerSymbol);
-            System.out.println("You play first.");
-        } else {
-            System.out.println("Computer won the toss!");
-            System.out.println("Computer is: " + computerSymbol);
-            System.out.println("You are: " + humanSymbol);
-            System.out.println("Computer plays first.");
-        }
+        return slot;
     }
 }
