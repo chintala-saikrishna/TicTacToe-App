@@ -22,6 +22,7 @@ public class TicTacToe {
         printBoard();
     }
 
+    // UC1
     static void initializeBoard() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -43,6 +44,7 @@ public class TicTacToe {
         }
     }
 
+    // UC2
     static void tossAndAssignSymbols() {
         Random rand = new Random();
         int toss = rand.nextInt(2);
@@ -72,6 +74,7 @@ public class TicTacToe {
         }
     }
 
+    // UC3
     static int getUserSlot() {
         Scanner sc = new Scanner(System.in);
 
@@ -81,10 +84,30 @@ public class TicTacToe {
         return slot;
     }
 
+    // UC5 (validation + placement)
     static void placeMove(int slot, char symbol) {
+
         int row = (slot - 1) / 3;
         int col = (slot - 1) % 3;
 
-        board[row][col] = symbol;
+        if (isValidMove(row, col)) {
+            board[row][col] = symbol;
+        } else {
+            System.out.println("Invalid move!");
+        }
+    }
+
+    // UC5 validation method
+    static boolean isValidMove(int row, int col) {
+
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            return false;
+        }
+
+        if (board[row][col] != '-') {
+            return false;
+        }
+
+        return true;
     }
 }
